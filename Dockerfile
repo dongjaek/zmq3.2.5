@@ -21,9 +21,15 @@ WORKDIR /home/docker
 RUN mkdir headers  
 WORKDIR /home/docker/headers
 RUN git clone https://github.com/zeromq/cppzmq
-RUN mv /home/docker/headers/cppzmq/zmq.hpp /usr/lib/include	
-RUN mv /home/docker/headers/cppzmq/zmq_addon.hpp /usr/lib/include
+RUN mv /home/docker/headers/cppzmq/zmq.hpp /usr/local/include	
+RUN mv /home/docker/headers/cppzmq/zmq_addon.hpp /usr/local/include
+# Cleanup the tarball, the untarred directory and the headers
+WORKDIR /home/docker
 RUN rm -rf /home/docker/headers
+RUN rm -rf /home/docker/zeromq-3.2.5
+RUN rm -rf /home/docker/zeromq-3.2.5.tar.gz
+# Set library environment variable to allow linking
+ENV LD_LIBRARY_PATH /usr/local/lib
 
 USER docker 
 CMD /bin/bash
