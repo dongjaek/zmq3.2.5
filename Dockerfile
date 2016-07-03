@@ -1,3 +1,5 @@
+# Download and install ZeroMQ 3.2.5 inside a docker container.
+# Name it dongjaek/zmq3.2.5:latest
 FROM dongjaek/dev:base
 MAINTAINER Dongjae Kim (david.kim9325@gmail.com)
 # The vast majority of the documentation of zeromq is for version 3xx so it would be best to use that version until we are comfortable enough to use 4xx.
@@ -23,4 +25,5 @@ RUN mv /home/docker/headers/cppzmq/zmq.hpp /usr/lib/include
 RUN mv /home/docker/headers/cppzmq/zmq_addon.hpp /usr/lib/include
 RUN rm -rf /home/docker/headers
 
+USER docker 
 CMD /bin/bash
